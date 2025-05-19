@@ -1,0 +1,15 @@
+<div class="directory" tabindex="0" (click)="open($event)" (keydown.enter)="open($event)" (keydown.space)="open($event)">
+  <div class="icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 2h9a2 2 0 0 1 2 2z"/>
+    </svg>
+  </div>
+
+  <div class="details">
+    <span class="name" [title]="content().name">
+      {{ content().name | slice:0:20 }}{{ content().name.length > 20 ? '...' : '' }}
+    </span>
+    <span class="size">{{content().size }}</span>
+    <span class="date">{{content().createdAt | date:'short'}}</span>
+  </div>
+</div>

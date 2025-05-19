@@ -1,0 +1,38 @@
+<div class="file-browser">
+  <div class="navigation">
+    <button (click)="navigateHome()">Home</button>
+    <button (click)="navigateUp()" [disabled]="!currentPath">↑ Up</button>
+    <span class="current-path">{{currentPath || 'Home Directory'}}</span>
+  </div>
+
+  @if (content$ | async; as content) {
+    <div class="directory-header">
+      <span class="name">Name</span>
+      <span class="size">Size</span>
+      <span class="date">Created</span>
+    </div>
+    <div class="directory-contents">
+      @if (content.contents.length > 0) {
+        @for (file of content.contents; let idx = $index; track idx) {
+          @if (file.isDirectory) {
+            <app-directory
+              [content]="file"
+              (openDir)="handleDirectoryOpen($event)">
+            </app-directory>
+          } @else {
+            <app-file [content]="file"></app-file>
+          }
+        }
+      } @else if (!errorMessage && content.contents.length === 0) {
+        <div>Empty directory</div>
+      }
+    </div>
+  } @else {
+    <div class="loading"> Loading...</div>
+  }
+
+  @if (errorMessage) {
+    <div class="error-message">Ooops! Looks like something is broken from our side <br/> {{ errorMessage }}</div>
+  }
+</div>
+

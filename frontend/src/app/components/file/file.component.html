@@ -1,0 +1,13 @@
+<div class="file">
+  <div class="icon">
+    {{getFileIcon(content().extension)}}
+  </div>
+
+  <div class="details">
+    <span class="name" [title]="content().name">
+      {{ content().name | slice:0:20 }}{{ content().name.length > 20 ? '...' : '' }}
+    </span>
+    <span class="size">{{content().size }}</span>
+    <span class="date">{{content().createdAt | date:'short'}}</span>
+  </div>
+</div>
